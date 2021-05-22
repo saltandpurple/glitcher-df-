@@ -4,13 +4,14 @@ from pathlib import Path
 
 
 class Glitcher:
-	startColumn = 200
-	glitchHeight = 100
-	shift = 120  # positive is to the right
-	mixRatio = 0.8  # ratio between original and random color in case of glitch, 0 <= mixRatio <= 1
-	redBase = 255  # minimum red value in case of glitch
-	greenBase = 0  # minimum green value in case of glitch
-	blueBase = 0  # minimum blue value in case of glitch
+	def __init__(self):
+		self.startColumn = 200
+		self.glitchHeight = 100
+		self.shift = 120  # positive is to the right
+		self.mixRatio = 0.8  # ratio between original and random color in case of glitch, 0 <= mixRatio <= 1
+		self.redBase = 255  # minimum red value in case of glitch
+		self.greenBase = 0  # minimum green value in case of glitch
+		self.blueBase = 0  # minimum blue value in case of glitch
 
 	def glitch(self, filepath):
 		path = Path(filepath)
@@ -40,6 +41,7 @@ class Glitcher:
 					green = int(((green * (1 - self.mixRatio)) + greenModifier * self.mixRatio))
 					blue = int(((blue * (1 - self.mixRatio)) + blueModifier * self.mixRatio))
 				pixels[currentX, j] = (red, green, blue)
+
 
 		savePath = path.parent / "edit.jpg"
 		print(savePath)
